@@ -1,4 +1,4 @@
-from item import Item
+from .item import Item
 
 class ActiveItem(Item):
     def __init__(self, name, position):

@@ -1,4 +1,4 @@
-from item import Item
+from .item import Item
 
 class PassiveItem(Item):
     def __init__(self, name, position):
