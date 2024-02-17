@@ -1,9 +1,4 @@
 class Item:
-    def __init__(self, name):
+    def __init__(self, name, position):
         self.name = name
-    
-    def pick_up(self):
-        pass
-    
-    def drop(self):
-        pass
+        self.position = position
