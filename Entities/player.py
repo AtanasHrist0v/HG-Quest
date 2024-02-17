@@ -1,15 +1,16 @@
-import entity
+from .entity import Entity
 from Components.passive_item import PassiveItem
 from Components.active_item import ActiveItem
 from Components.consumable import Consumable
 from Components.weapon import Weapon
 
-class Player(entity.Entity):
+class Player(Entity):
     MAX_HEALTH = 6
     def __init__(self, name, health, position, speed, surf, rect, armor, weapon, active_item, passive_items):
         super().__init__(name, health, position, speed, surf, rect)
         self.armor = armor
         self.weapon = weapon
+        self.pick_up(weapon)
         self.active_item = active_item
         self.passive_items = passive_items
         
@@ -31,7 +32,8 @@ class Player(entity.Entity):
             if item.name == 'Armor':
                 self.armor += 1
         elif isinstance(item, Weapon):
-            self.drop(self.weapon)
+            if self.weapon != None:
+                self.drop(self.weapon)
             self.weapon = item
         elif isinstance(item, ActiveItem):
             self.drop(self.active_item)
