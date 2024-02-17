@@ -6,6 +6,7 @@ from Components.weapon import Weapon
 
 class Player(Entity):
     MAX_HEALTH = 6
+    
     def __init__(self, name, health, position, speed, surf, rect, armor, weapon, active_item, passive_items):
         super().__init__(name, health, position, speed, surf, rect)
         self.armor = armor
@@ -13,16 +14,19 @@ class Player(Entity):
         self.pick_up(weapon)
         self.active_item = active_item
         self.passive_items = passive_items
-        
+
+
     def attack(self, target):
         target.take_damage(self.weapon.damage)
-    
+
+
     def take_damage(self, damage):
         self.armor -= damage
         if self.armor < 0:
             self.health += self.armor
             self.armor = 0
-        
+
+
     def pick_up(self, item):
         item.position = self.position
         
