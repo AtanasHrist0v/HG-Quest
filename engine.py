@@ -124,7 +124,7 @@ while running:
     if not player.alive():
         end_game()
         continue
-    
+
     display_everything()
     move_everything()
     get_hit_by_everything()
