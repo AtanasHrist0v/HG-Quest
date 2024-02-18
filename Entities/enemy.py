@@ -23,5 +23,4 @@ class Enemy(Entity):
             return
         movement_vector.normalize_ip()
         movement_vector.scale_to_length(self.speed * dt)
-        print(movement_vector)
         super().move(movement_vector)
