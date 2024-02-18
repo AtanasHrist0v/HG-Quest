@@ -4,9 +4,11 @@ from Components.active_item import ActiveItem
 from Components.consumable import Consumable
 from Components.weapon import Weapon
 
+
 class Player(Entity):
     MAX_HEALTH = 6
-    
+
+
     def __init__(self, name, health, position, speed, surf, rect, armor, weapon, active_item, passive_items):
         super().__init__(name, health, position, speed, surf, rect)
         self.armor = armor
@@ -33,7 +35,7 @@ class Player(Entity):
 
     def pick_up(self, item):
         item.position = self.position
-        
+
         if isinstance(item, Consumable):
             if item.name == 'Health' and self.health < Player.MAX_HEALTH:
                 self.health += 1

@@ -2,6 +2,7 @@ from pygame import Vector2
 from math import isclose
 from .entity import Entity
 
+
 class Enemy(Entity):
 
 
