@@ -11,7 +11,7 @@ class Entity:
         return self.health > 0
     
     def move(self, movement_vector):
-        self.position = tuple(map(sum, zip(self.position, movement_vector)))
+        self.rect.center = tuple(map(sum, zip(self.rect.center, movement_vector)))
     
     def attack(self, target):
         pass
