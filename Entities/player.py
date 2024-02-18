@@ -16,8 +16,12 @@ class Player(Entity):
         self.passive_items = passive_items
 
 
-    def attack(self, target):
-        target.take_damage(self.weapon.damage)
+    def attack(self, enemies):
+        enemies_in_range = self.weapon.aoe.collidelistall([enemy.rect for enemy in enemies])
+        if not enemies_in_range:
+            return
+        for enemy_ind in enemies_in_range:
+            enemies[enemy_ind].take_damage(self.weapon.damage)
 
 
     def take_damage(self, damage):
