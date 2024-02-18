@@ -1,15 +1,21 @@
 import pygame
-import random
-from Entities.enemy import Enemy
-from Components.weapon import Weapon
 from constants import DISPLAY_SIZE, DISPLAY_CENTER
+from Entities.enemy import Enemy
+
+
+# pygame setup part 1
+pygame.init()
+screen = pygame.display.set_mode(DISPLAY_SIZE)
+
+
+import random
 from Prefabs.player_prefab import player
+from Prefabs.dark_knight_prefab import dark_knight
 from Utilities.helper_functions import blitRotate
 
-# pygame setup
-pygame.init()
+
+# pygame setup part 2
 pygame.display.set_caption('HG Quest')
-screen = pygame.display.set_mode(DISPLAY_SIZE)
 clock = pygame.time.Clock()
 running = True
 dt = 0
@@ -43,15 +49,11 @@ hp_rect = hp_surf.get_rect(topleft = (10, 10))
 score_surf = GUI_font.render(str(score) , False, 'Black')
 score_rect = score_surf.get_rect(midtop = (screen.get_width() / 2, 10))
 
-enemy_surf = pygame.image.load('Assets/enemy_knight.png').convert_alpha()
-enemy_rect = enemy_surf.get_rect()
-enemy = Enemy('Dark Knight', 1, None, 100, enemy_surf, enemy_rect)
-
 inside_enemy = False
 
 entities = []
 
-def spawnEnemies(count):
+def spawnEnemies(count, enemy):
     for _ in range(count):
         enemy_pos_x = random.randrange(-32, screen.get_width() + 32)
         enemy_pos_y = random.randrange(-32, screen.get_height() + 32)
@@ -59,9 +61,9 @@ def spawnEnemies(count):
             enemy_pos_y = random.choice([-32, screen.get_height() + 32])
         if enemy_pos_y > 0 and enemy_pos_y < screen.get_height():
             enemy_pos_x = random.choice([-32, screen.get_width() + 32])
-        entities.append(Enemy(str(enemy.name), int(enemy.health), None, int(enemy.speed), enemy_surf, enemy_surf.get_rect(center = (enemy_pos_x, enemy_pos_y))))
+        entities.append(Enemy(str(enemy.name), int(enemy.health), None, int(enemy.speed), enemy.surf, enemy.surf.get_rect(center = (enemy_pos_x, enemy_pos_y))))
 
-spawnEnemies(10)
+spawnEnemies(10, dark_knight)
 
 attacking = False
 
