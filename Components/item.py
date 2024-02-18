@@ -1,4 +1,4 @@
 class Item:
-    def __init__(self, name, position):
+    def __init__(self, name, rect):
         self.name = name
-        self.position = position
+        self.rect = rect
