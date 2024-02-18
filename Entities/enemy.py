@@ -1,3 +1,5 @@
+from pygame import Vector2
+from math import isclose
 from .entity import Entity
 
 class Enemy(Entity):
@@ -16,5 +18,10 @@ class Enemy(Entity):
 
 
     def move(self, target, dt):
-        movement_vector = (self.rect.center - target.rect.center) * self.speed * dt
+        movement_vector = Vector2(target.rect.x - self.rect.x, target.rect.y - self.rect.y)
+        if isclose(movement_vector.length(), 0):
+            return
+        movement_vector.normalize_ip()
+        movement_vector.scale_to_length(self.speed * dt)
+        print(movement_vector)
         super().move(movement_vector)
